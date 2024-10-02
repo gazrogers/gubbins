@@ -1,0 +1,29 @@
+services:
+  gubbins:
+    image: gazrogers/gubbins:dev-0.1.0
+    ports:
+      - "80:80"
+    volumes:
+      - ../gubbins-phalcon:/var/www/html/gubbins
+    environment:
+      DB_HOST: db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PREFIX: ${DB_PREFIX}
+
+  db:
+    # 
+    # UNCOMMENT ONLY ONE IMAGE - arm64v8 is for Mac Silicon machines
+    # 
+    # image: mysql:8.0.39
+    image: arm64v8/mysql:8.0.39-oracle
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-setup-files/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: test-db-root-password
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: Europe/London

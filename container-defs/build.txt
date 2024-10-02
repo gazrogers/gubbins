@@ -1,0 +1,7 @@
+Dev container
+-------------
+docker buildx build --platform linux/amd64,linux/arm64 --push -t gazrogers/gubbins:dev-0.1.0 .
+
+Deploy container
+-----------------------
+docker buildx build --platform linux/amd64,linux/arm64 --push -t gazrogers/gubbins:deploy-0.1.0 .
