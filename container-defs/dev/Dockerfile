@@ -11,7 +11,7 @@ RUN apt update && apt install -y wget \
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 
-RUN install-php-extensions pdo_mysql xdebug
+RUN install-php-extensions pdo_mysql xdebug zip
 
 RUN a2enmod rewrite
 

@@ -1,2 +1,4 @@
 .DS_Store
-app/logs/*
+dev-env/.env
+gubbins-phalcon/app/logs/*
+gubbins-phalcon/cache/*

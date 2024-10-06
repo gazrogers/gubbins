@@ -1,6 +1,6 @@
 services:
   gubbins:
-    image: gazrogers/gubbins:dev-0.1.0
+    image: gazrogers/gubbins:dev-0.2.0
     ports:
       - "80:80"
     volumes:
@@ -10,6 +10,8 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PREFIX: ${DB_PREFIX}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
 
   db:
     # 
