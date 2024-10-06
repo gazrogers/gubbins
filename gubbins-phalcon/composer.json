@@ -4,5 +4,9 @@
     "version": "0.1.0",
     "type": "project",
     "minimum-stability": "dev",
-    "prefer-stable" : true
+    "prefer-stable" : true,
+    "require": {
+        "firebase/php-jwt": "^6.10",
+        "google/apiclient": "^2.15.0"
+    }
 }

@@ -47,10 +47,10 @@ $di->set(
         //     'dispatch:beforeExecuteRoute',
         //     new SecurityPlugin()
         // );
-        // $eventsManager->attach(
-        //     'dispatch:beforeException',
-        //     new ErrorHandler()
-        // );
+        $eventsManager->attach(
+            'dispatch:beforeException',
+            new ErrorHandler()
+        );
 
         $dispatcher = new Dispatcher();
         $dispatcher->setDefaultNamespace('Controller');
@@ -213,6 +213,27 @@ $di->setShared(
     'modelsMetadata',
     function () {
         return new MetaDataAdapter();
+    }
+);
+
+/**
+ * Register the response cache
+ */
+$di->set(
+    'responseCache',
+    function() {
+        $config = $this->getConfig();
+        $serializerFactory = new SerializerFactory();
+        $adapterFactory    = new AdapterFactory($serializerFactory);
+
+        $options = [
+            'defaultSerializer' => 'Php',
+            'storageDir'        => $config->application->cacheDir . 'responses',
+        ];
+
+        $adapter = $adapterFactory->newInstance('stream', $options);
+
+        return new Cache($adapter);
     }
 );
 

@@ -35,6 +35,10 @@ return new \Phalcon\Config\Config(
                 'models' => 7200,
             ]
         ],
+        "credentials" => [
+            "GOOGLE_CLIENT_ID" => getenv('GOOGLE_CLIENT_ID'),
+            "GOOGLE_CLIENT_SECRET" => getenv('GOOGLE_CLIENT_SECRET')
+        ],
         'logSql' => false
     ]
 );
