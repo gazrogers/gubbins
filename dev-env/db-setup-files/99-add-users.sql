@@ -1,0 +1,1 @@
+GRANT DELETE, INSERT, SELECT, SHOW VIEW, UPDATE ON dev_gubbins.* TO 'dev_user'@'%';

@@ -43,10 +43,10 @@ $di->set(
     'dispatcher',
     function () {
         $eventsManager = new EventsManager();
-        // $eventsManager->attach(
-        //     'dispatch:beforeExecuteRoute',
-        //     new SecurityPlugin()
-        // );
+        $eventsManager->attach(
+            'dispatch:beforeExecuteRoute',
+            new SecurityPlugin()
+        );
         $eventsManager->attach(
             'dispatch:beforeException',
             new ErrorHandler()

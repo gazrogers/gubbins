@@ -10,6 +10,8 @@ namespace Controller;
 use Google_Client;
 use Library\Exceptions\Forbidden as ForbiddenException;
 use Library\Exceptions\InternalServerError as InternalServerErrorException;
+use Model\Entity\GoogleLogins;
+use Model\Entity\Users;
 
 /**
  * Handles authorization
@@ -45,7 +47,8 @@ class LoginController extends \Phalcon\Mvc\Controller
         $payload = $client->verifyIdToken($this->request->get('credential'));
         if($payload)
         {
-            $userId = $payload['sub'];
+            $googleSubject = $payload['sub'];
+            $userName = $payload['given_name'] ?: $payload['family_name'];
             $userEmail = $payload['email'];
             $userImage = $payload["picture"];
         }
@@ -53,7 +56,32 @@ class LoginController extends \Phalcon\Mvc\Controller
         {
             throw new ForbiddenException("Invalid ID token");
         }
-        // Now either login existing user or create new user (use ID rater than email as this never changes)
+        // Now either login existing user or create new user (use ID rather than email as this never changes)
+        $user = GoogleLogins::findFirstByGoogleSubject($googleSubject);
+        if($user)
+        {
+            $user->User->userId;
+        }
+        else
+        {
+            $user = new Users([
+                'username' => $userName
+            ]);
+            $user->save();
+            $googleLogin = new GoogleLogins([
+                'googleSubject' => $googleSubject,
+                'userId' => $user->userId
+            ]);
+            $googleLogin->save();
+        }
+        $this->session->set(
+            'auth',
+            [
+                'userId' => $user->userId,
+                'name' => $user->username,
+                'roles' => ['User']
+            ]
+        );
 
         $this->response->redirect('/');
     }
