@@ -25,5 +25,12 @@ class Users extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->setSource("users");
+
+        $this->hasManyToMany(
+            'userId', FollowGraph::class, 'followed', 'follower', Users::class, 'userId', ['alias' => 'followers']
+        );
+        $this->hasManyToMany(
+            'userId', FollowGraph::class, 'follower', 'followed', Users::class, 'userId', ['alias' => 'follows']
+        );
     }
 }

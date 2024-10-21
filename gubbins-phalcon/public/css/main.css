@@ -10,3 +10,54 @@ html, body {
     font-optical-sizing: auto;
     font-weight: normal;
 }
+body {
+    display: grid;
+    grid-template:
+        [row1-start] "header" 3em [row1-end]
+        [row2-start] "plop" 1fr [row2-end];
+    padding: 0 2em;
+}
+body.login {
+    display: inline-grid;
+    grid-template-columns: 2fr 1fr;
+}
+body.login aside {
+    display: grid;
+    grid-template-rows: max-content;
+    place-content: center;
+    grid-gap: 1em;
+}
+header {
+    display: grid;
+    grid-template-columns: max-content;
+    line-height: 3em;
+    place-content: flex-end;
+}
+nav {
+    display: grid;
+    grid-template-rows: max-content;
+    place-items: flex-end;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    grid-template-rows: auto;
+}
+nav:hover ul {
+    display: grid;
+}
+main {
+    display: grid;
+    grid-template:
+        [row1-start] "posts" 1fr [row1-end]
+        [row2-start] "new-post" auto [row2-end];
+    grid-gap: 1em;
+}
+.posts {
+    grid-area: posts;
+}
+#new-post {
+    grid-area: new-post;
+}

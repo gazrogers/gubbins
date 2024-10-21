@@ -75,7 +75,7 @@ class SecurityPlugin extends Injectable
 
         //Private area resources
         $userResources = [
-            'index' => ['index']
+            // 'index' => ['index']
         ];
         foreach ($userResources as $resource => $actions) {
             $acl->addComponent(new Component($resource), $actions);
