@@ -9,3 +9,6 @@ nice to know what's happening under the covers.
 
 I'm starting with what I use in my day job - PHP with Phalcon for the backend. After that, assuming I don't lose
 interest, we'll see.
+
+*Edit*: I really don't know why bother doing this. I get so bored so quick that I just end up with a load of
+not very interesting incomplete things.
